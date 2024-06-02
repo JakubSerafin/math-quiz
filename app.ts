@@ -6,8 +6,8 @@ const resultsDiv = document.getElementById('results')!;
 type Problem = { x: number, y: number };
 
 let problems: Problem[] = [];
-for (let i = 0; i <= 10; i++) {
-  for (let j = 0; j <= 10; j++) {
+for (let i = 1; i <= 10; i++) {
+  for (let j = 1; j <= 10; j++) {
     problems.push({ x: i, y: j });
   }
 }
