@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #problem {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #input {
+            font-size: 24px;
+            padding: 5px;
+        }
+        .incorrect {
+            background-color: red;
+            transition: background-color 0.5s;
+        }
+        #timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="timer">Time: 0s</div>
+<div id="problem"></div>
+<input type="number" id="input" autocomplete="off">
+<div id="results"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
