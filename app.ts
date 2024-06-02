@@ -44,6 +44,7 @@ function startSimpleTest(){
 
 function displayProblem() {
   const problem = problems[currentProblemIndex];
+  updateProgressBar();
   problemDiv.textContent = `${problem.x} x ${problem.y} =`;
   input.value = '';
   input.focus();
@@ -52,6 +53,11 @@ function displayProblem() {
 function updateTimer() {
   const elapsed = Math.floor((Date.now() - startTime) / 1000);
   timerDiv.textContent = `Time: ${elapsed}s`;
+}
+
+function updateProgressBar() {
+  const progressBar = document.getElementById('progress') as HTMLProgressElement;
+  progressBar.value = ((currentProblemIndex+ 1) / problems.length) * 100;
 }
 
 function checkAnswer() {
@@ -96,5 +102,5 @@ input.addEventListener('keydown', (event) => {
   }
 });
 
-//startTest();
-startSimpleTest();
+startTest();
+//startSimpleTest();

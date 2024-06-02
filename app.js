@@ -36,6 +36,7 @@ function startSimpleTest() {
 }
 function displayProblem() {
     var problem = problems[currentProblemIndex];
+    updateProgressBar();
     problemDiv.textContent = "".concat(problem.x, " x ").concat(problem.y, " =");
     input.value = '';
     input.focus();
@@ -43,6 +44,10 @@ function displayProblem() {
 function updateTimer() {
     var elapsed = Math.floor((Date.now() - startTime) / 1000);
     timerDiv.textContent = "Time: ".concat(elapsed, "s");
+}
+function updateProgressBar() {
+    var progressBar = document.getElementById('progress');
+    progressBar.value = ((currentProblemIndex + 1) / problems.length) * 100;
 }
 function checkAnswer() {
     var problem = problems[currentProblemIndex];
@@ -81,5 +86,5 @@ input.addEventListener('keydown', function (event) {
         checkAnswer();
     }
 });
-//startTest();
-startSimpleTest();
+startTest();
+//startSimpleTest();
