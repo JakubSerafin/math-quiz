@@ -17,6 +17,8 @@ let startTime: number;
 let timerInterval: number | undefined;
 type Result = { time: number, date: string };
 let pastResults: Result[] = JSON.parse(localStorage.getItem('results') || '[]');
+let bestTime: number = Math.min(...pastResults.map(result => result.time), Infinity);
+
 
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -53,6 +55,9 @@ function displayProblem() {
 function updateTimer() {
   const elapsed = Math.floor((Date.now() - startTime) / 1000);
   timerDiv.textContent = `Time: ${elapsed}s`;
+
+  const bestTimeProgress = document.getElementById('bestTimeProgress') as HTMLProgressElement;
+  bestTimeProgress.value = (elapsed / bestTime) * 100;
 }
 
 function updateProgressBar() {
@@ -89,6 +94,7 @@ function endTest() {
   pastResults.push({ time: totalTime, date: finishDate });
   localStorage.setItem('results', JSON.stringify(pastResults));
   displayResults();
+  bestTime = Math.min(...pastResults.map(result => result.time), Infinity);
 }
 
 

@@ -1,10 +1,19 @@
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var problemDiv = document.getElementById('problem');
 var input = document.getElementById('input');
 var timerDiv = document.getElementById('timer');
 var resultsDiv = document.getElementById('results');
 var problems = [];
-for (var i = 0; i <= 10; i++) {
-    for (var j = 0; j <= 10; j++) {
+for (var i = 1; i <= 10; i++) {
+    for (var j = 1; j <= 10; j++) {
         problems.push({ x: i, y: j });
     }
 }
@@ -12,6 +21,7 @@ var currentProblemIndex = 0;
 var startTime;
 var timerInterval;
 var pastResults = JSON.parse(localStorage.getItem('results') || '[]');
+var bestTime = Math.min.apply(Math, __spreadArray(__spreadArray([], pastResults.map(function (result) { return result.time; }), false), [Infinity], false));
 function shuffleArray(array) {
     var _a;
     for (var i = array.length - 1; i > 0; i--) {
@@ -44,6 +54,8 @@ function displayProblem() {
 function updateTimer() {
     var elapsed = Math.floor((Date.now() - startTime) / 1000);
     timerDiv.textContent = "Time: ".concat(elapsed, "s");
+    var bestTimeProgress = document.getElementById('bestTimeProgress');
+    bestTimeProgress.value = (elapsed / bestTime) * 100;
 }
 function updateProgressBar() {
     var progressBar = document.getElementById('progress');
@@ -77,6 +89,7 @@ function endTest() {
     pastResults.push({ time: totalTime, date: finishDate });
     localStorage.setItem('results', JSON.stringify(pastResults));
     displayResults();
+    bestTime = Math.min.apply(Math, __spreadArray(__spreadArray([], pastResults.map(function (result) { return result.time; }), false), [Infinity], false));
 }
 function displayResults() {
     resultsDiv.innerHTML = "<h2>Time taken: ".concat(Math.floor((Date.now() - startTime) / 1000), "s</h2><h3>Past Results:</h3><ul>").concat(pastResults.map(function (result) { return "<li>Time: ".concat(result.time, "s, Date: ").concat(result.date, "</li>"); }).join(''), "</ul>");
